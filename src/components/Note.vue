@@ -50,17 +50,19 @@ const subject = ref("");
 const topic = ref("");
 const note = ref("");
 
-const noteCards = ref([])
+const noteCards = ref([]);
 
-const makeNote = ()=>{
-    noteCards.value.push({
-       subject : subject.value,
-       topic: topic.value,
-       note: note.value,
-       id: Math.floor(Math.random() * 1000000)
-    })
-console.log(noteCards.value)
-}
+const makeNote = () => {
+  noteCards.value.push({
+    subject: subject.value,
+    topic: topic.value,
+    note: note.value,
+    id: Math.floor(Math.random() * 1000000),
+  });
+  subject.value = "";
+  topic.value = "";
+  note.value = "";
+};
 </script>
 
 <template>
@@ -81,14 +83,29 @@ console.log(noteCards.value)
       </div>
     </div>
     <div class="container row">
-      <div v-for="noteCard in noteCards" :key="noteCard.id" class="p-2 col-md-4">
+      <div
+        v-for="noteCard in noteCards"
+        :key="noteCard.id"
+        class="p-2 col-md-4"
+      >
         <div class="card text-bg-primary card-shadow">
           <div class="card-header">{{ noteCard.subject }}</div>
-          <div class="card-body">
+          <div class="card-body ">
             <h5 class="card-title">{{ noteCard.topic }}</h5>
             <p class="card-text">
               {{ noteCard.note }}
             </p>
+            <div class="d-grid gap-2 d-md-block">
+              <button class="btn btn-dark rounded-0 me-2" type="button">
+                Edit
+              </button>
+              <button class="btn bg-black text-light rounded-0" type="button">
+                Delete
+              </button>
+            </div>
+          </div>
+          <div class="my-2 border-top border-dark">
+            <p class="text-center mb-0">Date</p>
           </div>
         </div>
       </div>
@@ -158,7 +175,12 @@ console.log(noteCards.value)
                 >
                   Cancel
                 </button>
-                <button type="submit" @click.prevent="makeNote" class="btn btn-primary">
+                <button
+                  type="submit"
+                  @click.prevent="makeNote"
+                  class="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
                   Save
                 </button>
               </div>
