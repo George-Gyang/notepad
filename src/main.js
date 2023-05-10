@@ -7,6 +7,7 @@ import Note from '@/components/Note.vue'
 // import ErrorPage from "@/views/ErrorPage.vue"
 import './assets/main.css'
 import 'bootstrap/js/dist/modal'
+import 'bootstrap/js/dist/alert'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({

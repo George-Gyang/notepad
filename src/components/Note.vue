@@ -49,39 +49,61 @@ const datas = [
 const subject = ref("");
 const topic = ref("");
 const note = ref("");
+const alert = ref("");
 
 const noteCards = ref([]);
 
 function background() {
-  return "hsl(" + Math.random() * 360 + " , 100%, 75%)"
-};
-
-    console.log(background())
-
+  return "hsl(" + Math.random() * 360 + " , 100%, 75%)";
+}
 
 const makeNote = () => {
+  if (note.value.length < 10 || topic.value < 1 || subject.value < 1) {
+    return (alert.value = "form is incompletely, or note is less than 10 characters!!!");
+  }
   noteCards.value.unshift({
     subject: subject.value,
     topic: topic.value,
     note: note.value,
     id: Math.floor(Math.random() * 1000000),
     backgroundColor: background(),
-    date: new Date(),
-    // test: new Date().
+    date: new Date()
   });
   subject.value = "";
   topic.value = "";
   note.value = "";
+  alert = "";
+};
+
+// console.log(noteCards.value.splice(noteCard.id, 1))
+
+const deleteNote = () => {
+  noteCards.value.splice(noteCards.id, 1);
 };
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <div class="">
       <h1 class="text-center">Jotting App</h1>
       <div class="d-flex justify-content-between p-2">
         <p>Always take note as you study</p>
+
+        <!-- conditional alert -->
+        <div v-if="alert"
+          class="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          {{ alert }}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
         <button
+          @click="dismissModal = true"
           class="btn btn-success"
           type="button"
           data-bs-toggle="modal"
@@ -99,8 +121,9 @@ const makeNote = () => {
         class="p-2 col-md-4"
       >
         <div
-        style="background-color: {{ noteCard.backgroundColor }}"
-         class="card text-bg-primry card-shadow">
+          :style="{ backgroundColor: noteCard.backgroundColor }"
+          class="card card-shadow"
+        >
           <div class="card-header">{{ noteCard.subject }}</div>
           <div class="card-body">
             <h5 class="card-title">{{ noteCard.topic }}</h5>
@@ -111,14 +134,27 @@ const makeNote = () => {
               <button class="btn btn-dark rounded-0 me-2" type="button">
                 Edit
               </button>
-              <button class="btn bg-black text-light rounded-0" type="button">
+              <button
+                @click="deleteNote"
+                class="btn bg-black text-light rounded-0"
+                type="button"
+              >
                 Delete
               </button>
             </div>
           </div>
-          <div class="my-2 border-top d-flex justify-content-between border-dark">
-            <small class="ms-3">{{ noteCard.date.getMinutes() }} : {{ noteCard.date.getHours() }}</small>
-            <small class="text-center me-3"> {{ noteCard.date.getDay() }}/{{ noteCard.date.getMonth() }}/{{ noteCard.date.getFullYear() }}</small>
+          <div
+            class="my-2 border-top d-flex justify-content-between border-dark"
+          >
+            <small class="ms-3"
+              >{{ noteCard.date.getMinutes() }} :
+              {{ noteCard.date.getHours() }}</small
+            >
+            <small class="text-center me-3">
+              {{ noteCard.date.getDay() }}/{{ noteCard.date.getMonth() }}/{{
+                noteCard.date.getFullYear()
+              }}</small
+            >
           </div>
         </div>
       </div>
@@ -174,12 +210,13 @@ const makeNote = () => {
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Note:</label>
                 <textarea
-                  v-model="note"
+                  v-model.trim="note"
                   class="form-control"
                   id="message-text"
                   name="newNote"
                 ></textarea>
               </div>
+
               <div class="modal-footer">
                 <button
                   type="button"
