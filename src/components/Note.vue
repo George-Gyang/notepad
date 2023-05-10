@@ -59,7 +59,8 @@ function background() {
 
 const makeNote = () => {
   if (note.value.length < 10 || topic.value < 1 || subject.value < 1) {
-    return (alert.value = "form is incompletely, or note is less than 10 characters!!!");
+    return (alert.value =
+      "form is incompletely, or note is less than 10 characters!!!");
   }
   noteCards.value.unshift({
     subject: subject.value,
@@ -67,12 +68,12 @@ const makeNote = () => {
     note: note.value,
     id: Math.floor(Math.random() * 1000000),
     backgroundColor: background(),
-    date: new Date()
+    date: new Date(),
   });
   subject.value = "";
   topic.value = "";
   note.value = "";
-  alert = "";
+  alert.value = "";
 };
 
 // console.log(noteCards.value.splice(noteCard.id, 1))
@@ -90,18 +91,6 @@ const deleteNote = () => {
         <p>Always take note as you study</p>
 
         <!-- conditional alert -->
-        <div v-if="alert"
-          class="alert alert-danger alert-dismissible fade show"
-          role="alert"
-        >
-          {{ alert }}
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-          ></button>
-        </div>
         <button
           @click="dismissModal = true"
           class="btn btn-success"
@@ -157,6 +146,23 @@ const deleteNote = () => {
             >
           </div>
         </div>
+      </div>
+
+      <div
+        v-if="alert"
+        class="alert alert-danger d-flex align-items-center"
+        role="alert"
+      >
+        <svg
+          class="bi flex-shrink-0 me-2"
+          width="24"
+          height="24"
+          role="img"
+          aria-label="Danger:"
+        >
+          <use xlink:href="#exclamation-triangle-fill" />
+        </svg>
+        <div>{{ alert }}</div>
       </div>
     </div>
 
