@@ -52,12 +52,22 @@ const note = ref("");
 
 const noteCards = ref([]);
 
+function background() {
+  return "hsl(" + Math.random() * 360 + " , 100%, 75%)"
+};
+
+    console.log(background())
+
+
 const makeNote = () => {
-  noteCards.value.push({
+  noteCards.value.unshift({
     subject: subject.value,
     topic: topic.value,
     note: note.value,
     id: Math.floor(Math.random() * 1000000),
+    backgroundColor: background(),
+    date: new Date(),
+    // test: new Date().
   });
   subject.value = "";
   topic.value = "";
@@ -88,9 +98,11 @@ const makeNote = () => {
         :key="noteCard.id"
         class="p-2 col-md-4"
       >
-        <div class="card text-bg-primary card-shadow">
+        <div
+        style="background-color: {{ noteCard.backgroundColor }}"
+         class="card text-bg-primry card-shadow">
           <div class="card-header">{{ noteCard.subject }}</div>
-          <div class="card-body ">
+          <div class="card-body">
             <h5 class="card-title">{{ noteCard.topic }}</h5>
             <p class="card-text">
               {{ noteCard.note }}
@@ -104,8 +116,9 @@ const makeNote = () => {
               </button>
             </div>
           </div>
-          <div class="my-2 border-top border-dark">
-            <p class="text-center mb-0">Date</p>
+          <div class="my-2 border-top d-flex justify-content-between border-dark">
+            <small class="ms-3">{{ noteCard.date.getMinutes() }} : {{ noteCard.date.getHours() }}</small>
+            <small class="text-center me-3"> {{ noteCard.date.getDay() }}/{{ noteCard.date.getMonth() }}/{{ noteCard.date.getFullYear() }}</small>
           </div>
         </div>
       </div>
