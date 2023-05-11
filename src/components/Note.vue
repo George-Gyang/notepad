@@ -87,7 +87,7 @@ const deleteNote = () => {
   <div class="container">
     <div class="">
       <h1 class="text-center">Jotting App</h1>
-      <div class="d-flex justify-content-between p-2">
+      <div class="d-flex justify-content-between align-items-center p-2">
         <p>Always take note as you study</p>
 
         <!-- conditional alert -->
