@@ -93,13 +93,13 @@ const deleteNote = () => {
         <!-- conditional alert -->
         <button
           @click="dismissModal = true"
-          class="btn btn-success"
+          class="btn rounded-circle btn-success"
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
           data-bs-whatever="@getbootstrap"
         >
-          Add Note
+          +
         </button>
       </div>
     </div>
@@ -111,7 +111,7 @@ const deleteNote = () => {
       >
         <div
           :style="{ backgroundColor: noteCard.backgroundColor }"
-          class="card card-shadow"
+          class="card pb-0 card-shadow"
         >
           <div class="card-header">{{ noteCard.subject }}</div>
           <div class="card-body">
@@ -119,13 +119,13 @@ const deleteNote = () => {
             <p class="card-text">
               {{ noteCard.note }}
             </p>
-            <div class="d-grid gap-2 d-md-block">
-              <button class="btn btn-dark rounded-0 me-2" type="button">
+            <div class=" d-flex justify-content-between">
+              <button class="btn btn-dark rounded-5 fs-6 btn-sm" type="button">
                 Edit
               </button>
               <button
                 @click="deleteNote"
-                class="btn bg-black text-light rounded-0"
+                class="btn bg-black text-light rounded-5 fs-6 btn-sm"
                 type="button"
               >
                 Delete
@@ -136,11 +136,11 @@ const deleteNote = () => {
             class="my-2 border-top d-flex justify-content-between border-dark"
           >
             <small class="ms-3"
-              >{{ noteCard.date.getMinutes() }} :
-              {{ noteCard.date.getHours() }}</small
+              >{{ noteCard.date.getHours() }} :
+              {{ noteCard.date.getMinutes() }}</small
             >
             <small class="text-center me-3">
-              {{ noteCard.date.getDay() }}/{{ noteCard.date.getMonth() }}/{{
+              {{ noteCard.date.getDate() }}/{{ noteCard.date.getMonth() + 1 }}/{{
                 noteCard.date.getFullYear()
               }}</small
             >
