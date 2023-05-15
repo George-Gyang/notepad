@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import {RouterLink, useRouter} from "vue-router"
 
 const datas = [
   {
@@ -46,6 +47,8 @@ const datas = [
   },
 ];
 
+const router = useRouter()
+
 const subject = ref("");
 const topic = ref("");
 const note = ref("");
@@ -76,11 +79,14 @@ const makeNote = () => {
   alert.value = "";
 };
 
+
 // console.log(noteCards.value.splice(noteCard.id, 1))
 
 const deleteNote = () => {
   noteCards.value.splice(noteCards.id, 1);
 };
+
+// this.ddddd = noteCards;
 </script>
 
 <template>
@@ -119,10 +125,15 @@ const deleteNote = () => {
             <p class="card-text">
               {{ noteCard.note }}
             </p>
-            <div class=" d-flex justify-content-between">
-              <button class="btn btn-dark rounded-5 fs-6 btn-sm" type="button">
-                Edit
-              </button>
+            <div class="d-flex justify-content-between">
+              <!-- <RouterLink :to="`/note/${noteCard.id}`"> -->
+                <button @click="router.push(`/note/${noteCard.id}`)"
+                  class="btn btn-dark rounded-5 fs-6 btn-sm"
+                  type="button"
+                >
+                  View
+                </button>
+              <!-- </RouterLink> -->
               <button
                 @click="deleteNote"
                 class="btn bg-black text-light rounded-5 fs-6 btn-sm"
@@ -140,9 +151,9 @@ const deleteNote = () => {
               {{ noteCard.date.getMinutes() }}</small
             >
             <small class="text-center me-3">
-              {{ noteCard.date.getDate() }}/{{ noteCard.date.getMonth() + 1 }}/{{
-                noteCard.date.getFullYear()
-              }}</small
+              {{ noteCard.date.getDate() }}/{{
+                noteCard.date.getMonth() + 1
+              }}/{{ noteCard.date.getFullYear() }}</small
             >
           </div>
         </div>
