@@ -82,9 +82,12 @@ const makeNote = () => {
 
 // console.log(noteCards.value.splice(noteCard.id, 1))
 
-const deleteNote = () => {
-  noteCards.value.splice(noteCards.id, 1);
-};
+const deleteNote =(id) => {
+      const index = noteCards.value.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        noteCards.value.splice(index, 1);
+      }
+    };
 
 // this.ddddd = noteCards;
 </script>
@@ -135,7 +138,7 @@ const deleteNote = () => {
                 </button>
               <!-- </RouterLink> -->
               <button
-                @click="deleteNote"
+                @click="deleteNote(noteCard.id)"
                 class="btn bg-black text-light rounded-5 fs-6 btn-sm"
                 type="button"
               >
