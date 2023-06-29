@@ -1,10 +1,15 @@
 <script setup>
 import { useRoute, useRouter, RouterLink } from "vue-router";
-import Note from "./Note.vue";
+
+import noteCards from "../views/Note.vue"
 
 const route = useRoute();
 
+// const note = noteCards.find((q) => q.id === parseInt(route.params.id));
+
 const router = useRouter();
+
+// const quiz = noteCards.find((q) => q.id === parseInt(route.params.id));
 
 // console.log(route.params)
 
@@ -14,6 +19,7 @@ const router = useRouter();
 <template>
   <div>
     <div class="p-5">
+      <!-- {{ note }} -->
       <div class="card pb-0 card-shadow">
         <div class="card-header">noteCard.subject</div>
         <div class="card-body">
@@ -21,9 +27,9 @@ const router = useRouter();
           <p class="card-text">noteCard.note</p>
           <div class="d-flex justify-content-between">
             <!-- <RouterLink to="/note"> -->
-              <button @click="router.push('/note')" class="btn btn-dark rounded-5 fs-6 btn-sm" type="button">
-                back
-              </button>
+            <RouterLink :to="`/note`" class="rounded-5 fs-6 btn-sm">
+              back
+            </RouterLink>
             <!-- </RouterLink> -->
             <button
               @click="deleteNote"

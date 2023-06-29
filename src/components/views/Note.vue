@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import {RouterLink, useRouter} from "vue-router"
+import { RouterLink, useRouter } from "vue-router";
 
 const datas = [
   {
@@ -47,7 +47,7 @@ const datas = [
   },
 ];
 
-const router = useRouter()
+const router = useRouter();
 
 const subject = ref("");
 const topic = ref("");
@@ -79,15 +79,23 @@ const makeNote = () => {
   alert.value = "";
 };
 
-
 // console.log(noteCards.value.splice(noteCard.id, 1))
 
-const deleteNote =(id) => {
-      const index = noteCards.value.findIndex((item) => item.id === id);
-      if (index !== -1) {
-        noteCards.value.splice(index, 1);
-      }
-    };
+const deleteNote = (id) => {
+  const index = noteCards.value.findIndex((item) => item.id === id);
+  if (index !== -1) {
+    noteCards.value.splice(index, 1);
+  }
+};
+
+
+// const showNote = (id) => {
+//   const item = noteCards.value.findIndex((note) => note.id === id);
+//   console.log(item)
+//   if (item !== -1) {
+//     router.push(`/note/${item}`);
+//   }
+// };
 
 // this.ddddd = noteCards;
 </script>
@@ -130,12 +138,11 @@ const deleteNote =(id) => {
             </p>
             <div class="d-flex justify-content-between">
               <!-- <RouterLink :to="`/note/${noteCard.id}`"> -->
-                <button @click="router.push(`/note/${noteCard.id}`)"
-                  class="btn btn-dark rounded-5 fs-6 btn-sm"
-                  type="button"
-                >
-                  View
-                </button>
+              <RouterLink :to="`note/${noteCard.id}`"
+                class=" rounded-5 fs-6 btn-sm"
+              >
+                View
+              </RouterLink >
               <!-- </RouterLink> -->
               <button
                 @click="deleteNote(noteCard.id)"
