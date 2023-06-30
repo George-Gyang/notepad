@@ -88,7 +88,6 @@ const deleteNote = (id) => {
   }
 };
 
-
 // const showNote = (id) => {
 //   const item = noteCards.value.findIndex((note) => note.id === id);
 //   console.log(item)
@@ -103,20 +102,31 @@ const deleteNote = (id) => {
 <template>
   <div class="container">
     <div class="">
-      <h1 class="text-center">Jotting App</h1>
+      <h1 class="text-center text-success fw-bolder mt-4 animate_charcter">Jotting App</h1>
       <div class="d-flex justify-content-between align-items-center p-2">
-        <p>Always take note as you study</p>
+        <p class="text-black fw-bold">Always take note as you study</p>
 
         <!-- conditional alert -->
         <button
           @click="dismissModal = true"
-          class="btn rounded-circle btn-success"
+          class="btn round_btn rounded-circle btn-success h1"
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
           data-bs-whatever="@getbootstrap"
         >
-          +
+          <span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="white"
+                d="M12 4c4.411 0 8 3.589 8 8s-3.589 8-8 8s-8-3.589-8-8s3.589-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2zm5 9h-4V7h-2v4H7v2h4v4h2v-4h4v-2z"
+              /></svg
+          ></span>
         </button>
       </div>
     </div>
@@ -138,11 +148,12 @@ const deleteNote = (id) => {
             </p>
             <div class="d-flex justify-content-between">
               <!-- <RouterLink :to="`/note/${noteCard.id}`"> -->
-              <RouterLink :to="`note/${noteCard.id}`"
-                class=" rounded-5 fs-6 btn-sm"
+              <RouterLink
+                :to="`note/${noteCard.id}`"
+                class="rounded-5 fs-6 btn-sm"
               >
                 View
-              </RouterLink >
+              </RouterLink>
               <!-- </RouterLink> -->
               <button
                 @click="deleteNote(noteCard.id)"
@@ -268,3 +279,66 @@ const deleteNote = (id) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.round_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 3rem;
+}
+.animate_charcter
+{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #000000 0%,
+    #277927 20%,
+    #79eb79 40%,
+    #44107a 60%,
+    #ff1361 80%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 4s linear infinite;
+  display: block;
+      font-size: 2rem;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 70% center;
+  }
+}
+
+
+.h1 {
+  margin: 0;
+  z-index: 1;
+  font-family: "Teko", sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  animation: glow 1s ease-in-out infinite alternate;
+  text-align: center;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px #212529;
+  }
+  to {
+    box-shadow: 0 0 30px #34b3c1, 0 0 10px #4dbbc7;
+  }
+  to {
+    box-shadow: 0 0 30px #ffc107, 0 0 10px #4dbbc7;
+  }
+}
+</style>
