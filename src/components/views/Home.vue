@@ -37,7 +37,7 @@ import { RouterLink } from "vue-router";
 <style scoped>
 .main_img {
   width: 100%;
-  max-height: 100vh !important;
+  height: 100vh !important;
 }
 
 .animate_charcter {
